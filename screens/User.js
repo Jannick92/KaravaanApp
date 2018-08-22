@@ -3,18 +3,20 @@ import styles from "../Styles.js";
 import { Text, View, TouchableHighlight, Image } from "react-native";
 
 export default class User extends React.Component {
-  state = {
-    username: this.props.username,
-    balance: this.props.balance
-  };
-
   render() {
     return (
-      <TouchableHighlight style={styles.button}>
+      <View>
         <Text>
-          title = {this.state.username}, type = {this.state.type}
+          Welcome {this.props.user.username}! Your balance is €
+          {this.props.user.balance}
         </Text>
-      </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.bottomButton}
+          onPress={() => this.props.onReset(this.props.user)}
+        >
+          <Text style={styles.buttonText}>PAY</Text>
+        </TouchableHighlight>
+      </View>
     );
   }
 }

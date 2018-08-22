@@ -2,10 +2,17 @@ import React from "react";
 import styles from "../Styles.js";
 import { Text, View, TouchableHighlight } from "react-native";
 import { TabNavigator } from "react-navigation";
+import User from "./User";
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    const name = this.props.navigation.state.params;
+    const user = this.state.users.filter(u => u.username == name)[0];
+    this.state.currentUser = user.id;
+  }
   state = {
-    currentId: 0,
+    currentUser: 0,
     users: [
       { id: 1, username: "Jan", balance: 6.05 },
       { id: 2, username: "Koen", balance: -12.8 },
@@ -13,24 +20,24 @@ export default class Home extends React.Component {
     ]
   };
 
-  payDebt = () => {
+  handleReset = user => {
     const users = [...this.state.users];
-    const user = users[this.state.currentId];
-    users[user.id].balance = 0;
-    //this.setState({ users });
+    const index = users.indexOf(user);
+    users[index] = { ...user };
+    users[index].balance = 0;
+    this.setState({ users });
   };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View>
-        <Text>{this.formatBalance()}</Text>
-        <TouchableHighlight
-          style={styles.bottomButton}
-          onPress={this.payDebt()}
-        >
-          <Text style={styles.buttonText}>PAY-OFF DEBT</Text>
-        </TouchableHighlight>
+        {this.state.users.map(user => {
+          if (user.id == this.state.currentUser)
+            return (
+              <User key={user.id} user={user} onReset={this.handleReset} />
+            );
+        })}
         <TouchableHighlight
           style={styles.bottomButton}
           onPress={() => navigate("Trips", this.props.navigation.state.params)}
@@ -57,20 +64,5 @@ export default class Home extends React.Component {
         </TouchableHighlight>
       </View>
     );
-  }
-
-  formatBalance() {
-    const name = this.props.navigation.state.params;
-    const users = this.state.users;
-    const user = users.filter(u => u.username == name)[0];
-
-    this.setState({ currentId: user.id });
-    /*if (user == undefined) {
-      user.username = name;
-      user.balance = 0;
-      users.push(user);
-      this.setState({ users: users });
-    }*/
-    return "Welcome " + name + "! Your balance is €" + user.balance;
   }
 }
