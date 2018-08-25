@@ -1,60 +1,44 @@
 import React from "react";
-import { Text, View, TouchableHighlight } from "react-native";
+import {
+  Text,
+  ScrollView,
+  TouchableHighlight,
+  AsyncStorage,
+  View
+} from "react-native";
 import styles from "../Styles.js";
-
-import Trip from "./Trip";
+import { tripdb, userdb } from "../App";
 
 export default class Trips extends React.Component {
-  state = {
-    trips: [
-      {
-        id: 1,
-        title: "Rhone",
-        type: "Frankrijk met Nadia en Willem",
-        participants: [
-          { username: "Jan" },
-          { username: "Rene" },
-          { username: "Karen" }
-        ]
-      },
-      {
-        id: 2,
-        title: "Familie",
-        type: "voor afspraken met de familie",
-        participants: [{ username: "Jan" }, { username: "Koen" }]
-      }
-    ]
-  };
-
-  handleDelete = tripId => {
-    console.log("event handler called for id: " + tripId);
-    const trips = this.state.trips.filter(t => t.id != tripId);
-    this.setState({ trips });
-  };
-
-  verify(trip) {
-    for (let i = 0; i < trip.participants.length; i++) {
-      if (trip.participants[i].username == this.props.navigation.state.params)
-        return true;
-    }
-    return false;
-  }
-
   render() {
+    /*var promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.state.trips = tripdb.getTrips();
+      }, 3000);
+    });*/
     const { navigate } = this.props.navigation;
     return (
-      <View>
-        {this.state.trips.map(trip => {
-          if (this.verify(trip))
+      <ScrollView onContentSizeChange={this.onContentSizeChange}>
+        <View>
+          {tripdb.getTripsFromPerson(userdb.getCurrentUser()).map(trip => {
             return (
-              <Trip
-                key={trip.id}
-                trip={trip}
-                onDelete={() => this.handleDelete(trip.id)}
-              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center"
+                }}
+              >
+                <Text style={styles.listText}>{trip.title}</Text>
+                <TouchableHighlight
+                  style={styles.listButton}
+                  onPress={() => this.handleDelete(trip.id)}
+                >
+                  <Text style={styles.buttonText}>DEL</Text>
+                </TouchableHighlight>
+              </View>
             );
-        })}
-
+          })}
+        </View>
         <TouchableHighlight
           style={styles.bottomButton}
           onPress={() => navigate("AddTrip")}
@@ -67,7 +51,12 @@ export default class Trips extends React.Component {
         >
           <Text style={styles.buttonText}>BACK</Text>
         </TouchableHighlight>
-      </View>
+      </ScrollView>
     );
   }
+
+  handleDelete = tripId => {
+    //const trips = this.state.trips.filter(t => t.id != tripId);
+    console.log("trip deleted");
+  };
 }

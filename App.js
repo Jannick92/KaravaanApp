@@ -7,6 +7,11 @@ import AddTripScreen from "./screens/AddTripScreen";
 import LogInScreen from "./screens/LogInScreen";
 import TripsScreen from "./screens/TripsScreen";
 import { createStackNavigator } from "react-navigation";
+import UserDb from "./db/UserDb";
+import TripDb from "./db/TripDb";
+
+export const userdb = new UserDb();
+export const tripdb = new TripDb();
 
 const Navigation = createStackNavigator({
   LogIn: { screen: LogInScreen },

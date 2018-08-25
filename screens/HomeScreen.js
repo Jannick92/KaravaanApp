@@ -1,54 +1,35 @@
 import React from "react";
 import styles from "../Styles.js";
-import { Text, View, TouchableHighlight } from "react-native";
-import { TabNavigator } from "react-navigation";
-import User from "./User";
+import { Text, View, TouchableHighlight, AsyncStorage } from "react-native";
+import { userdb } from "../App";
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-    const name = this.props.navigation.state.params;
-    const user = this.state.users.filter(u => u.username == name)[0];
-    this.state.currentUser = user.id;
+    this.state.currentUser = userdb.getUser(this.props.navigation.state.params);
+    userdb.setCurrentUser(this.state.currentUser.username);
   }
-  state = {
-    currentUser: 0,
-    users: [
-      { id: 1, username: "Jan", balance: 6.05 },
-      { id: 2, username: "Koen", balance: -12.8 },
-      { id: 3, username: "Rene", balance: 8 }
-    ]
-  };
 
-  handleReset = user => {
-    const users = [...this.state.users];
-    const index = users.indexOf(user);
-    users[index] = { ...user };
-    users[index].balance = 0;
-    this.setState({ users });
+  state = {
+    currentUser: {
+      username: "",
+      balance: 0.0
+    }
   };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View>
-        {this.state.users.map(user => {
-          if (user.id == this.state.currentUser)
-            return (
-              <User key={user.id} user={user} onReset={this.handleReset} />
-            );
-        })}
+        <Text>
+          Welcome {this.state.currentUser.username}! Your balance is €
+          {this.state.currentUser.balance}
+        </Text>
         <TouchableHighlight
           style={styles.bottomButton}
-          onPress={() => navigate("Trips", this.props.navigation.state.params)}
+          onPress={() => navigate("Trips")}
         >
           <Text style={styles.buttonText}>VIEW TRIPS</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.bottomButton}
-          onPress={() => navigate("AddTrip")}
-        >
-          <Text style={styles.buttonText}>NEW TRIP</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.bottomButton}
