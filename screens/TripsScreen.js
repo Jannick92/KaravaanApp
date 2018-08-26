@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, ScrollView, TouchableHighlight, View } from "react-native";
 import styles from "../Styles.js";
-import { tripdb, userdb } from "../App";
+import { tripdb, userdb, expensedb } from "../App";
 
 export default class Trips extends React.Component {
   render() {
@@ -17,12 +17,23 @@ export default class Trips extends React.Component {
                   alignItems: "center"
                 }}
               >
-                <Text style={styles.listText}>{trip.title}</Text>
                 <TouchableHighlight
                   style={styles.listButton}
-                  onPress={() => this.handleDelete(trip.id)}
+                  onPress={() => this.tripNavigate(trip.id, "Expenses")}
                 >
-                  <Text style={styles.buttonText}>DEL</Text>
+                  <Text style={styles.listText}>{trip.title}</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={styles.listButton}
+                  onPress={() => this.tripNavigate(trip.id, "TripOverview")}
+                >
+                  <Text style={styles.buttonText}>OVERVIEW</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={styles.listButton}
+                  onPress={() => this.tripNavigate(trip.id, "AddExpense")}
+                >
+                  <Text style={styles.buttonText}>ADD BILL</Text>
                 </TouchableHighlight>
               </View>
             );
@@ -44,8 +55,8 @@ export default class Trips extends React.Component {
     );
   }
 
-  handleDelete = tripId => {
-    //const trips = this.state.trips.filter(t => t.id != tripId);
-    console.log("trip deleted");
-  };
+  tripNavigate(id, url) {
+    expensedb.setCurrentTrip(id);
+    this.props.navigation.navigate(url);
+  }
 }

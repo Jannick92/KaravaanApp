@@ -31,9 +31,9 @@ export default class Expenses extends React.Component {
         </View>
         <TouchableHighlight
           style={styles.bottomButton}
-          onPress={() => navigate("AddTrip")}
+          onPress={() => navigate("AddExpense")}
         >
-          <Text style={styles.buttonText}>ADD TRIP</Text>
+          <Text style={styles.buttonText}>ADD EXPENSE</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.bottomButton}
@@ -44,9 +44,4 @@ export default class Expenses extends React.Component {
       </ScrollView>
     );
   }
-
-  /*handleDelete = tripId => {
-    //const trips = this.state.trips.filter(t => t.id != tripId);
-    console.log("trip deleted");
-  };*/
 }

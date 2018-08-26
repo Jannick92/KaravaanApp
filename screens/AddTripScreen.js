@@ -87,7 +87,6 @@ export default class AddTrip extends React.Component {
     let par = this.state.participants.filter(u => u.username != "");
     for (let i = 0; i < par.length; i++) {
       if (userdb.getUser() == null) userdb.addUser(username);
-      //check for duplicates
       for (let j = 0; j < par.length; j++) {
         if (par[i] == par[j] && i != j) par.pop(par[j]);
       }

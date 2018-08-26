@@ -6,6 +6,13 @@ import {
 } from "react-native-responsive-dimensions";
 
 var styles = StyleSheet.create({
+  usernameInput: {
+    flex: 0.6
+  },
+
+  balanceInput: {
+    flex: 0.3
+  },
   listButton: {
     flex: 1,
     paddingLeft: responsiveWidth(3),
@@ -16,7 +23,7 @@ var styles = StyleSheet.create({
     fontSize: 18,
     alignItems: "center",
     fontWeight: "bold",
-    width: responsiveWidth(60),
+    width: responsiveWidth(30),
     marginLeft: responsiveWidth(3)
   },
   main: {

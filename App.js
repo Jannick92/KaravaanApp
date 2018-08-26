@@ -7,6 +7,7 @@ import AddTripScreen from "./screens/AddTripScreen";
 import LogInScreen from "./screens/LogInScreen";
 import TripsScreen from "./screens/TripsScreen";
 import ExpensesScreen from "./screens/ExpensesScreen";
+import TripOverviewScreen from "./screens/TripOverviewScreen";
 import { createStackNavigator } from "react-navigation";
 import UserDb from "./db/UserDb";
 import TripDb from "./db/TripDb";
@@ -23,7 +24,8 @@ const Navigation = createStackNavigator({
   AddExpense: { screen: AddExpenseScreen },
   ViewSaldo: { screen: ViewSaldoScreen },
   AddTrip: { screen: AddTripScreen },
-  Trips: { screen: TripsScreen }
+  Trips: { screen: TripsScreen },
+  TripOverview: { screen: TripOverviewScreen }
 });
 
 export default Navigation;
