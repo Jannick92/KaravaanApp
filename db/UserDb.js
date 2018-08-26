@@ -22,6 +22,12 @@ export default class UserDataBase {
     return this.currentUser;
   }
 
+  addUser(username) {
+    let user = { username: username, balance: 0 };
+    this.users.push(user);
+    AsyncStorage.setItem("users", this.users);
+  }
+
   getUser(username) {
     let user = users.filter(u => u.username == username)[0];
     if (!user) {

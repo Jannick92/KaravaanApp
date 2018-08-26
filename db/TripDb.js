@@ -1,12 +1,11 @@
 import React from "react";
 import tripData from "./trips";
-import Trip from "../class/Trip";
 import { AsyncStorage } from "react-native";
 
 export default class TripDataBase {
   constructor() {
-    this.trips = tripData;
-    AsyncStorage.setItem("trips", tripData);
+    this.trips = [];
+    //AsyncStorage.setItem("trips", tripData);
     AsyncStorage.getItem("trips").then(data => {
       this.trips = data.length > 0 ? JSON.parse(data) : tripData;
     });
@@ -29,7 +28,7 @@ export default class TripDataBase {
 
   addTrip(trip) {
     trip.id = this.trips.length + 1;
-    this.trips[this.trips.length] = trip;
+    this.trips.push(trip);
     AsyncStorage.setItem("trips", this.trips);
   }
 

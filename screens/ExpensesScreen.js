@@ -1,32 +1,33 @@
 import React from "react";
 import { Text, ScrollView, TouchableHighlight, View } from "react-native";
 import styles from "../Styles.js";
-import { tripdb, userdb } from "../App";
+import { expensedb, userdb } from "../App";
 
-export default class Trips extends React.Component {
+export default class Expenses extends React.Component {
+  state = {
+    currentUser: userdb.getCurrentUser()
+  };
   render() {
     const { navigate } = this.props.navigation;
     return (
       <ScrollView onContentSizeChange={this.onContentSizeChange}>
         <View>
-          {tripdb.getTripsFromPerson(userdb.getCurrentUser()).map(trip => {
-            return (
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center"
-                }}
-              >
-                <Text style={styles.listText}>{trip.title}</Text>
-                <TouchableHighlight
-                  style={styles.listButton}
-                  onPress={() => this.handleDelete(trip.id)}
+          {expensedb
+            .getExpensesUserList(this.state.currentUser)
+            .map(expense => {
+              return (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center"
+                  }}
                 >
-                  <Text style={styles.buttonText}>DEL</Text>
-                </TouchableHighlight>
-              </View>
-            );
-          })}
+                  <Text style={styles.listText}>{expense.title}</Text>
+                  <Text style={styles.listText}>{expense.date}</Text>
+                  <Text style={styles.listText}>€{expense.balance}</Text>
+                </View>
+              );
+            })}
         </View>
         <TouchableHighlight
           style={styles.bottomButton}
@@ -44,8 +45,8 @@ export default class Trips extends React.Component {
     );
   }
 
-  handleDelete = tripId => {
+  /*handleDelete = tripId => {
     //const trips = this.state.trips.filter(t => t.id != tripId);
     console.log("trip deleted");
-  };
+  };*/
 }

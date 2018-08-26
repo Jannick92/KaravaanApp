@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "Restaurant",
+    "date": "06/06/2018",
+    "trip": 1,
+    "amount": 9,
+    "participants": [
+      { "username": "Jan", "balance": 6 },
+      { "username": "Rene", "balance": -3 },
+      { "username": "Kimberley", "balance": -3 }
+    ]
+  }
+]

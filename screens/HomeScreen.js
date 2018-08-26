@@ -33,9 +33,9 @@ export default class Home extends React.Component {
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.bottomButton}
-          onPress={() => navigate("AddExpense")}
+          onPress={() => navigate("Expenses")}
         >
-          <Text style={styles.buttonText}>CHOOSE EXPENSE</Text>
+          <Text style={styles.buttonText}>VIEW EXPENSE</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.bottomButton}
