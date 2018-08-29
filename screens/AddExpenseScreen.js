@@ -13,11 +13,11 @@ import {
 } from "react-native-elements";
 import styles from "../Styles.js";
 import CheckBox from "react-native-check-box";
-import { expensedb, userdb } from "../App";
+import { expensedb, userdb, tripdb } from "../App";
 
 export default class AddTrip extends React.Component {
   state = {
-    trip: expensedb.getCurrentTrip(),
+    trip: tripdb.getCurrentTrip(),
     title: "",
     date: "",
     type: "",
@@ -183,11 +183,19 @@ export default class AddTrip extends React.Component {
       amount: this.state.amount,
       participants: par
     };
-    if (par.length > 0 && this.state.title != "" && this.state.payer != "") {
+    if (par.length > 0 && this.state.title != "" && this.state.payer != ""/*,isEven(par)*/) {
       expensedb.addExpense(expense);
       this.props.navigation.navigate("Expenses");
     }
   };
+
+  isEven(par){
+    let sum = 0;
+    for (let i=0;i<par.length;i++){
+      sum+= par[i].balance;
+    }
+    return sum==0
+  }
 
   getValidParticipants() {
     let par = this.state.participants.filter(u => u.username != "");

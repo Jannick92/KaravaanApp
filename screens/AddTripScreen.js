@@ -12,7 +12,7 @@ export default class AddTrip extends React.Component {
   state = {
     title: "",
     type: "",
-    participants: [{ username: userdb.getCurrentUser() }]
+    participants: [{ username: userdb.getCurrentUser(), balance: 0, payed: 0 }]
   };
   render() {
     const { navigate } = this.props.navigation;

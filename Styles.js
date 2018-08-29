@@ -29,7 +29,7 @@ var styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: "#42f492",
-    alignItems: "stretch"
+    alignItems: "center"
   },
 
   formView: {
@@ -60,6 +60,11 @@ var styles = StyleSheet.create({
   buttonText: {
     alignItems: "center",
     fontSize: responsiveFontSize(2.5)
+  },
+
+  image: {
+    alignSelf:"center",
+    margin: responsiveHeight(3),
   }
 });
 

@@ -17,7 +17,7 @@ export default class LogIn extends React.Component {
         onContentSizeChange={this.onContentSizeChange}
         contentContainerStyle={styles.main}
       >
-        <Image source={require("../karavaan.jpg")} />
+        <Image style={styles.Image} source={require("../karavaan.jpg")} />
         <FormLabel>Enter Username</FormLabel>
         <FormInput onChangeText={username => this.setState({ username })} />
         <TouchableHighlight

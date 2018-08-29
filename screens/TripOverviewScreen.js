@@ -7,21 +7,32 @@ import {
   FormInput,
   FormValidationMessage
 } from "react-native-elements";
+import { tripdb } from "../App";
 
 export default class TripOverview extends React.Component {
   state = { username: "" };
 
   render() {
     const { navigate } = this.props.navigation;
-    const tableHeaders = ["title", "type", "date", "amount"];
+    const tableHeaders = ["name", "balance", "payed"];
+    console.log(tripdb.getCurrentTrip())
     return (
       <ScrollView
         onContentSizeChange={this.onContentSizeChange}
-        contentContainerStyle={styles.main}
       >
         <Table>
           <Row data={tableHeaders} />
+          {tripdb.getParticipants(tripdb.getCurrentTrip()).map(user => {
+            data = [user.username, user.balance, user.payed]
+            return <Row data={data} />;
+          })}
         </Table>
+        <TouchableHighlight
+          style={styles.bottomButton}
+          onPress={() => navigate("Trips")}
+        >
+          <Text style={styles.buttonText}>BACK</Text>
+        </TouchableHighlight>
       </ScrollView>
     );
   }

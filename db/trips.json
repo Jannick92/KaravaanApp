@@ -4,32 +4,38 @@
     "title": "Rhone",
     "type": "Frankrijk met Nadia en Willem",
     "participants": [
-      { "username": "Jan" },
-      { "username": "Rene" },
-      { "username": "Karen" }
+      { "username": "Jan", "balance": 20, "payed": 0 },
+      { "username": "Rene", "balance": -10, "payed": 0 },
+      { "username": "Karen", "balance": -10, "payed": 0 }
     ]
   },
   {
     "id": 2,
     "title": "Familie",
     "type": "voor afspraken met de familie",
-    "participants": [{ "username": "Jan" }, { "username": "Koen" }]
+    "participants": [
+      { "username": "Jan", "balance": 17.15, "payed": 0 },
+      { "username": "Koen", "balance": -17.15, "payed": 0 }
+    ]
   },
   {
     "id": 3,
     "title": "Japanreis",
     "type": "met vrienden naar Japan",
     "participants": [
-      { "username": "Chantal" },
-      { "username": "Kimberley" },
-      { "username": "Koen" },
-      { "username": "Karen" }
+      { "username": "Chantal", "balance": -28.45, "payed": 0 },
+      { "username": "Kimberley", "balance": 80.45, "payed": 0 },
+      { "username": "Koen", "balance": -52, "payed": 0 },
+      { "username": "Karen", "balance": 0, "payed": 0 }
     ]
   },
   {
     "id": 4,
     "title": "Etentje",
     "type": "naar comme chez soi met het werk",
-    "participants": [{ "username": "Jan" }, { "username": "Kimberley" }]
+    "participants": [
+      { "username": "Jan", "balance": 150, "payed": 0 },
+      { "username": "Kimberley", "balance": -150, "payed": 0 }
+    ]
   }
 ]

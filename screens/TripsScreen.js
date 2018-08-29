@@ -56,7 +56,7 @@ export default class Trips extends React.Component {
   }
 
   tripNavigate(id, url) {
-    expensedb.setCurrentTrip(id);
+    tripdb.setCurrentTrip(id);
     this.props.navigation.navigate(url);
   }
 }
